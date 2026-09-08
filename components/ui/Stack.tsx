@@ -77,6 +77,7 @@ export interface StackProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElem
     hAlign?: Alignment;
     flex?: number | boolean;
     backgroundColor?: BackgroundColor;
+    radius?: number;
 }
 
 function SpacingValueToCSS(spacing: SpacingValue): string {
@@ -99,6 +100,7 @@ export default function Stack(
         vAlign,
         flex,
         backgroundColor,
+        radius,
         ...props
     }: StackProps
 ) {
@@ -106,6 +108,7 @@ export default function Stack(
         display: "flex",
         width,
         height,
+        borderRadius: radius ? `${radius}px` : undefined,
         flex: typeof flex === "number" ? flex : flex ? 1 : undefined,
         ...props.style
     }
