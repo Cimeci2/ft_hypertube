@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import type { Notification } from "@/components/notification/notification.type"
+import NotificationContainer from "./NotificationContainer";
 
 type CreateNotification = Omit<Notification, "id">
 
@@ -21,12 +22,16 @@ export default function NotificationProvider({
 }) {
   const [notifications, setNotifications] = useState<Notification[]>([])
 
+    useEffect(() => {
+      console.log(notifications)
+    }, [notifications])
+
   function notify(notification: CreateNotification) {
     const newNotification = {
       id: crypto.randomUUID(),
       ...notification
     }
-
+    console.log(newNotification)
     setNotifications(previous => [
       ...previous,
       newNotification
@@ -48,6 +53,7 @@ export default function NotificationProvider({
       }}
     >
       {children}
+      <NotificationContainer/>
     </NotificationContext.Provider>
   )
 }

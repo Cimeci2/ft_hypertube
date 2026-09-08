@@ -1,6 +1,4 @@
-import Image from "next/image";
 import LogoutButton from "@/components/LogoutButton"
-import NotificationModal from "@/components/notification/Notification"
 
 export default function Home() {
   return (

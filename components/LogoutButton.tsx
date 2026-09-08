@@ -77,13 +77,13 @@ function useLogout(
 
 
   function logout() {
-    console.log('logout')
     setNotificationIsOpen(true)
     notify({
       title: "Déconnexion",
       message: "Vous avez été déconnecté.",
       type: "success"
     });
+    console.log('logout')
   }
 
   function handleLogout() {
@@ -167,10 +167,10 @@ export default function LogoutButton({
         `}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={handleLogout}
       >
         <button
           className="cursor-pointer" 
-          onClick={handleLogout}
         >
           {children ?? "Logout"}
         </button>
