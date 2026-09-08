@@ -83,7 +83,6 @@ function useLogout(
       message: "Vous avez été déconnecté.",
       type: "success"
     });
-    console.log('logout')
   }
 
   function handleLogout() {

@@ -22,16 +22,11 @@ export default function NotificationProvider({
 }) {
   const [notifications, setNotifications] = useState<Notification[]>([])
 
-    useEffect(() => {
-      console.log(notifications)
-    }, [notifications])
-
   function notify(notification: CreateNotification) {
     const newNotification = {
       id: crypto.randomUUID(),
       ...notification
     }
-    console.log(newNotification)
     setNotifications(previous => [
       ...previous,
       newNotification
