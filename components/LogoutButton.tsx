@@ -77,7 +77,6 @@ function useLogout(
 
 
   function logout() {
-    console.log('logout')
     setNotificationIsOpen(true)
     notify({
       title: "Déconnexion",
@@ -167,10 +166,10 @@ export default function LogoutButton({
         `}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={handleLogout}
       >
         <button
           className="cursor-pointer" 
-          onClick={handleLogout}
         >
           {children ?? "Logout"}
         </button>
