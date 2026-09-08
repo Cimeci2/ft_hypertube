@@ -1,28 +1,46 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --text-color-1: #e8e8e8;
-  --text-color-2: #322f2f;
-}
+  --color-white: #F6F7F9;
+  --color-black: #000000;
+  --color-green: #01B341;
+  --color-yellow: #FFD900;
+  --color-blue: #0175DA;
+  --color-red: #EB3301;
+  --color-purple: #753BF2;
+  --color-orange: #FF7B04;
+  --color-cyan: #01B39B;
+  --color-light-yellow: #E8FF01;
+  --color-pink: #F3387F;
+  --color-taupe: #A6887E;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-funnel-sans);
-  --font-mono: var(--font-funnel-mono);
-}
+  --surface-background: var(--color-black);
+  --surface-primary: var(--color-light-yellow);
+  --surface-gradient-background-top: linear-gradient(to top, var(--surface-background), rgba(var(--surface-background), 0));
+  --surface-gradient-background-bottom: linear-gradient(to bottom, var(--surface-background), rgba(var(--surface-background), 0));
+  --surface-light: rgba(var(--color-white), 0.6);
+  --surface-light-secondary: rgba(var(--color-white), 0.4);
+  --surface-light-tertiary: rgba(var(--color-white), 0.1);
+  --surface-dark: rgba(var(--color-black), 0.6);
+  --surface-dark-secondary: rgba(var(--color-black), 0.4);
+  --surface-dark-tertiary: rgba(var(--color-black), 0.1);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #767272;
-    --foreground: #b0a0a0;
-  }
+  --text-light: var(--color-white);
+  --text-light-secondary: rgba(var(--color-white), 0.5);
+  --text-dark: var(--color-black);
+  --text-dark-secondary: rgba(var(--color-black), 0.5);
+
+  --border-light: rgba(var(--color-white), 0.1);
+  --border-dark: rgba(var(--color-black), 0.1);
+
+  --font-body: 'Funnel Sans', sans-serif;
+
+  --typography-title: 700 40px var( --font-body);
+  --typography-body: 500 1rem var(--font-body);
+
+  font-size: 17px;
 }
 
 body {
-  background: var(--background);
-  color: var(--text-color-1);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface-background);
+  color: var(--text-light);
+  font: var(--typography-body);
 }
