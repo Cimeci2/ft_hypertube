@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import type { Notification } from "@/components/notification/notification.type"
+import type { Notification } from "@/app/components/notification/notification.type"
 import NotificationContainer from "./NotificationContainer";
 
 type CreateNotification = Omit<Notification, "id">

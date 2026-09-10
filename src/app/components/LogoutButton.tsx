@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { useNotification } from "./notification/useNotification";
+import { authClient } from "@/src/lib/auth-client";
 
 type LogoutButtonProps = {
   children?: string;
@@ -76,7 +77,18 @@ function useLogout(
   const { notify } = useNotification();
 
 
-  function logout() {
+  async function logout() {
+    const { error } = await authClient.signOut({
+      callbackURL: '/',
+    })
+    if (error) {
+      notify({
+        title: "Logout error",
+        type: "error"
+      })
+      console.error("Logout login error:", error);
+      return;
+    }
     setNotificationIsOpen(true)
     notify({
       title: "Déconnexion",

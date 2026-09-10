@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function Header() {  
     return (
         <>
@@ -7,8 +9,10 @@ export default function Header() {
                     logo
                 </div>
                 {/* title center place */}
-                <div className='font-semibold'>
-                    ScrollStream
+                <div className='flex gap-2 font-semibold'>
+                    <Link href="/">Home</Link>
+                    <Link href="/login">Login</Link>
+                    <Link href="/register">Register</Link>
                 </div>
                 {/* profil right place */}
                 <div className="gap-2">
