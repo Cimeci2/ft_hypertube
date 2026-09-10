@@ -1,28 +1,60 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --text-color-1: #e8e8e8;
-  --text-color-2: #322f2f;
+  --color-white: #F6F7F9;
+  --color-black: #000000;
+  --color-green: #01B341;
+  --color-yellow: #FFD900;
+  --color-blue: #0175DA;
+  --color-red: #EB3301;
+  --color-purple: #753BF2;
+  --color-orange: #FF7B04;
+  --color-cyan: #01B39B;
+  --color-light-yellow: #E8FF01;
+  --color-pink: #F3387F;
+  --color-taupe: #A6887E;
+
+  --surface-background: var(--color-black);
+  --surface-primary: var(--color-light-yellow);
+  --surface-selection: rgb(from var(--surface-primary) r g b / 50%);
+  --surface-gradient-background-top: linear-gradient(to top, var(--surface-background), transparent);
+  --surface-gradient-background-bottom: linear-gradient(to bottom, var(--surface-background), transparent);
+  --surface-light: rgb(from var(--color-white) r g b / 60%);
+  --surface-light-secondary: rgb(from var(--color-white) r g b / 40%);
+  --surface-light-tertiary-highlighted: rgb(from var(--color-white) r g b / 15%);
+  --surface-light-tertiary: rgb(from var(--color-white) r g b / 10%);
+  --surface-dark: rgb(from var(--color-black) r g b / 60%);
+  --surface-dark-secondary: rgb(from var(--color-black) r g b / 40%);
+  --surface-dark-tertiary: rgb(from var(--color-black) r g b / 10%);
+
+  --text-light: var(--color-white);
+  --text-light-secondary: rgb(from var(--color-white) r g b / 50%);
+  --text-light-secondary-highlighted: rgb(from var(--color-white) r g b / 70%);
+  --text-dark: var(--color-black);
+  --text-dark-secondary: rgb(from var(--color-black) r g b / 50%);
+  --text-dark-secondary-highlighted: rgb(from var(--color-black) r g b / 70%);
+
+  --border-light: rgb(from var(--color-white) r g b / 10%);
+  --border-dark: rgb(from var(--color-black) r g b / 10%);
+
+  --font-body: 'Funnel Sans', sans-serif;
+
+  --typography-title: 700 40px var( --font-body);
+  --typography-body: 500 1rem var(--font-body);
+
+  font-size: 16px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-funnel-sans);
-  --font-mono: var(--font-funnel-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #767272;
-    --foreground: #b0a0a0;
-  }
+::selection {
+  background-color: var(--surface-selection);
 }
 
 body {
-  background: var(--background);
-  color: var(--text-color-1);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--surface-background);
+  color: var(--text-light);
+  font: var(--typography-body);
 }

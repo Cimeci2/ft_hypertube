@@ -1,96 +1,36 @@
 import {CSSProperties, DetailedHTMLProps, HTMLAttributes} from "react";
 import {Property} from "csstype";
+import {
+    Direction,
+    Alignment,
+    SpacingValue,
+    DirectionToCSS,
+    FlexValue,
+    FlexValueToCSS,
+    AlignmentToCSS, SpacingValueToCSS, ColorToCSS, Color
+} from "@/components/ui/utils";
 
-export type SpacingValue = number | [number, number] | [number, number, number, number];
-export type Direction = "vertical" | "horizontal";
-export type Alignment = "start" | "center" | "end";
-export type BackgroundColorName =
-    | "white"
-    | "black"
-    | "green"
-    | "yellow"
-    | "blue"
-    | "red"
-    | "purple"
-    | "orange"
-    | "cyan"
-    | "light-yellow"
-    | "pink"
-    | "taupe"
-    | "background"
-    | "primary"
-    | "gradientBackgroundTop"
-    | "gradientBackgroundBottom"
-    | "light"
-    | "lightSecondary"
-    | "lightTertiary"
-    | "dark"
-    | "darkSecondary"
-    | "darkTertiary"
-
-export type BackgroundColor =
-    | BackgroundColorName
-    | (string & {})
-
-const BackgroundColorLinkedVariables: Record<BackgroundColorName, string> = {
-    white: "var(--color-white)",
-    black: "var(--color-black)",
-    green: "var(--color-green)",
-    yellow: "var(--color-yellow)",
-    blue: "var(--color-blue)",
-    red: "var(--color-red)",
-    purple: "var(--color-purple)",
-    orange: "var(--color-orange)",
-    cyan: "var(--color-cyan)",
-    "light-yellow": "var(--color-light-yellow)",
-    pink: "var(--color-pink)",
-    taupe: "var(--color-taupe)",
-
-    background: "var(--surface-background)",
-    primary: "var(--surface-primary)",
-    gradientBackgroundTop: "var(--surface-gradient-background-top)",
-    gradientBackgroundBottom: "var(--surface-gradient-background-bottom)",
-
-    light: "var(--surface-light)",
-    lightSecondary: "var(--surface-light-secondary)",
-    lightTertiary: "var(--surface-light-tertiary)",
-
-    dark: "var(--surface-dark)",
-    darkSecondary: "var(--surface-dark-secondary)",
-    darkTertiary: "var(--surface-dark-tertiary)",
-}
-
-const AlignementLinkedVariables: Record<Alignment, string> = {
-    start: "flex-start",
-    center: "center",
-    end: "flex-end",
-}
 
 export interface StackProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     direction?: Direction
-    gap?: number
+    gap?: number | "auto"
     padding?: SpacingValue
     margin?: SpacingValue
-    height?: Property.Height
-    width?: Property.Width
+    height?: Property.Height<string | number>
+    width?: Property.Width<string | number>
+    maxWidth?: 1200 | Property.Width<string | number>
     vAlign?: Alignment;
     hAlign?: Alignment;
-    flex?: number | boolean;
-    backgroundColor?: BackgroundColor;
-}
-
-function SpacingValueToCSS(spacing: SpacingValue): string {
-    if (Array.isArray(spacing)) {
-        return `${spacing[0]}px ${spacing[1]}px${spacing.length > 2 ? ` ${spacing[2]}px ${spacing[3]}px` : ''}`;
-    } else {
-        return `${spacing}px`;
-    }
+    flex?: FlexValue;
+    background?: Color;
+    border?: "light" | "dark",
+    radius?: number;
 }
 
 export default function Stack(
     {
         direction = "vertical",
-        gap,
+        gap = 10,
         padding,
         margin,
         width,
@@ -98,23 +38,36 @@ export default function Stack(
         hAlign,
         vAlign,
         flex,
-        backgroundColor,
+        background,
+        radius,
+        border,
+        maxWidth,
         ...props
     }: StackProps
 ) {
-    let computedStyle: CSSProperties = {
+    const computedStyle: CSSProperties = {
         display: "flex",
+        ...DirectionToCSS(direction),
+        flexWrap: "wrap",
         width,
         height,
-        flex: typeof flex === "number" ? flex : flex ? 1 : undefined,
+        maxWidth,
+        borderRadius: radius ? `${radius}px` : undefined,
+        ...FlexValueToCSS(flex),
+        border: border ? `1px solid ${ColorToCSS(border === "light" ? "borderLight" : "borderDark")}` : undefined,
         ...props.style
     }
 
-    if (direction === "horizontal") computedStyle.flexDirection = "row";
-    if (gap) computedStyle.gap = `${gap}px`;
-    if (backgroundColor) computedStyle.backgroundColor = BackgroundColorLinkedVariables[backgroundColor as BackgroundColorName] ?? backgroundColor;
-    if (hAlign) computedStyle.justifyContent = AlignementLinkedVariables[hAlign];
-    if (vAlign) computedStyle.alignItems = AlignementLinkedVariables[vAlign];
+    if (background) computedStyle.background = ColorToCSS(background);
+    if (hAlign) computedStyle.justifyContent = AlignmentToCSS(hAlign);
+    if (vAlign) computedStyle.alignItems = AlignmentToCSS(vAlign);
+    if (gap) {
+        if (gap === "auto") {
+            computedStyle[direction === "horizontal" ? "justifyContent" : "alignItems"] = "space-between";
+        } else {
+            computedStyle.gap = `${gap}px`;
+        }
+    }
 
     if (padding) computedStyle.padding = SpacingValueToCSS(padding);
     if (margin) computedStyle.margin = SpacingValueToCSS(margin);
