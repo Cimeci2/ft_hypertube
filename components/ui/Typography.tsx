@@ -10,7 +10,7 @@ export interface TypographyProps extends ComponentPropsWithRef<"p"> {
     bold?: number | boolean;
     fontSize?: number;
     color?: Color;
-    children: string;
+    children?: string;
     uppercase?: boolean;
 }
 
