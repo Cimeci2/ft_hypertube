@@ -14,6 +14,7 @@
 
   --surface-background: var(--color-black);
   --surface-primary: var(--color-light-yellow);
+  --surface-selection: rgb(from var(--surface-primary) r g b / 50%);
   --surface-gradient-background-top: linear-gradient(to top, var(--surface-background), transparent);
   --surface-gradient-background-bottom: linear-gradient(to bottom, var(--surface-background), transparent);
   --surface-light: rgb(from var(--color-white) r g b / 60%);
@@ -26,8 +27,10 @@
 
   --text-light: var(--color-white);
   --text-light-secondary: rgb(from var(--color-white) r g b / 50%);
+  --text-light-secondary-highlighted: rgb(from var(--color-white) r g b / 70%);
   --text-dark: var(--color-black);
   --text-dark-secondary: rgb(from var(--color-black) r g b / 50%);
+  --text-dark-secondary-highlighted: rgb(from var(--color-black) r g b / 70%);
 
   --border-light: rgb(from var(--color-white) r g b / 10%);
   --border-dark: rgb(from var(--color-black) r g b / 10%);
@@ -37,10 +40,20 @@
   --typography-title: 700 40px var( --font-body);
   --typography-body: 500 1rem var(--font-body);
 
-  font-size: 17px;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background-color: var(--surface-selection);
 }
 
 body {
+  margin: 0;
+  padding: 0;
   background: var(--surface-background);
   color: var(--text-light);
   font: var(--typography-body);

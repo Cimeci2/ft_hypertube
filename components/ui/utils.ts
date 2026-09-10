@@ -70,8 +70,10 @@ export type ColorName =
     | "darkTertiary"
     | "textLight"
     | "textLightSecondary"
+    | "textLightSecondaryHighlighted"
     | "textDark"
     | "textDarkSecondary"
+    | "textDarkSecondaryHighlighted"
     | "borderLight"
     | "borderDark";
 export type Color = ColorName | (string & {});
@@ -105,8 +107,10 @@ const BackgroundColorLinkedVariables: Record<Color, string> = {
 
     textLight: "var(--text-light)",
     textLightSecondary: "var(--text-light-secondary)",
+    textLightSecondaryHighlighted: "var(--text-light-secondary-highlighted)",
     textDark: "var(--text-dark)",
     textDarkSecondary: "var(--text-dark-secondary)",
+    textDarkSecondaryHighlighted: "var(--text-dark-secondary-highlighted)",
 
     borderLight: "var(--border-light)",
     borderDark: "var(--border-dark)",
