@@ -6,13 +6,15 @@ import {
     extractCSSPropertiesWithState,
     CSSPropertiesWithState
 } from "@/components/ui/utils";
-import {Typography} from "@/components/ui/Typography";
+import {Typography, TypographyProps} from "@/components/ui/Typography";
 import {motion} from "motion/react"
 import Stack from "@/components/ui/Stack";
+import {Property} from "csstype";
 
-export type ButtonVariant = "primary" | "secondary";
+export type ButtonVariant = "primary" | "secondary" | "borderless";
 
 export interface ButtonProps {
+    width?: Property.Width<string | number>,
     left?: React.ReactNode,
     right?: React.ReactNode,
     children: string | React.ReactNode,
@@ -22,15 +24,21 @@ export interface ButtonProps {
     variant?: ButtonVariant,
     square?: boolean,
     scale?: number,
+    href?: string,
     onClick?: () => void,
 }
 
+interface CSSPropertiesWithTypographyProps extends CSSPropertiesWithState {
+    typography?: TypographyProps
+}
+
 export function Button(props: ButtonProps) {
-    const variants: Record<ButtonVariant, CSSPropertiesWithState> = {
+    const variants: Record<ButtonVariant, CSSPropertiesWithTypographyProps> = {
         primary: {
             backgroundColor: ColorToCSS("primary"),
             color: ColorToCSS("textDark"),
             borderStyle: "none",
+            typography: { bold: true },
             hover: {color: ColorToCSS("textLight")},
             active: {scale: props.scale ?? 0.96},
         },
@@ -40,17 +48,32 @@ export function Button(props: ButtonProps) {
             borderWidth: 1,
             borderStyle: "solid",
             borderColor: ColorToCSS("borderLight"),
+            backdropFilter: "blur(10px) brightness(0.5)",
             hover: {backgroundColor: ColorToCSS("lightTertiaryHighlighted")},
+            active: {scale: props.scale ?? 0.96},
+        },
+        borderless: {
+            background: "transparent",
+            borderStyle: "none",
+            color: ColorToCSS("textLightSecondary"),
+            padding: 10,
+            minWidth: undefined,
+            height: 30,
+            typography: { bold: true },
+            hover: {color: ColorToCSS("textLightSecondaryHighlighted")},
             active: {scale: props.scale ?? 0.96},
         }
     }
 
+    const { typography: typographyProps, ...cssProperties } = variants[props.variant ?? "secondary"]
+    const Component = props.href ? motion.a : motion.button;
+
     return (
-        <motion.button
+        <Component
             {...extractCSSPropertiesWithState({
                 position: "relative",
                 height: 45,
-                width: props.square ? 45 : undefined,
+                width: props.square ? 45 : props.width,
                 minWidth: typeof props.children === "string" ? 120 : undefined,
                 padding: props.square ? "0px" : "0px 10px",
                 display: "flex",
@@ -59,13 +82,15 @@ export function Button(props: ButtonProps) {
                 overflow: "hidden",
                 outline: `1px solid ${ColorToCSS("primary")}00`,
                 outlineOffset: 2,
+                textDecoration: "none",
                 focus: {
                     outline: `2px solid ${ColorToCSS("primary")}`,
                 },
-                ...variants[props.variant ?? "secondary"]
+                ...cssProperties
             }, {variantHover: "hover"})}
             initial="initial"
             onClick={props.onClick}
+            href={props.href}
         >
             {props.variant === "primary" && (["yellow", "orange", "red", "pink", "purple"] as Color[]).map((color, index) => (
                 <motion.span
@@ -110,9 +135,9 @@ export function Button(props: ButtonProps) {
             <Stack direction={"horizontal"} style={{zIndex: 1}}>
                 {props.left}
                 {typeof props.children === "string" ?
-                    <Typography bold={props.variant === "primary"}>{props.children}</Typography> : props.children}
+                    <Typography {...typographyProps}>{props.children}</Typography> : props.children}
                 {props.right}
             </Stack>
-        </motion.button>
+        </Component>
     )
 }
