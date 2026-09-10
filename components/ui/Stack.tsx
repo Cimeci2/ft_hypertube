@@ -13,15 +13,16 @@ import {
 
 export interface StackProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     direction?: Direction
-    gap?: number
+    gap?: number | "auto"
     padding?: SpacingValue
     margin?: SpacingValue
-    height?: Property.Height
-    width?: Property.Width
+    height?: Property.Height<string | number>
+    width?: Property.Width<string | number>
+    maxWidth?: 1200 | Property.Width<string | number>
     vAlign?: Alignment;
     hAlign?: Alignment;
     flex?: FlexValue;
-    backgroundColor?: Color;
+    background?: Color;
     border?: "light" | "dark",
     radius?: number;
 }
@@ -37,9 +38,10 @@ export default function Stack(
         hAlign,
         vAlign,
         flex,
-        backgroundColor,
+        background,
         radius,
         border,
+        maxWidth,
         ...props
     }: StackProps
 ) {
@@ -49,16 +51,23 @@ export default function Stack(
         flexWrap: "wrap",
         width,
         height,
+        maxWidth,
         borderRadius: radius ? `${radius}px` : undefined,
         ...FlexValueToCSS(flex),
         border: border ? `1px solid ${ColorToCSS(border === "light" ? "borderLight" : "borderDark")}` : undefined,
         ...props.style
     }
 
-    if (gap) computedStyle.gap = `${gap}px`;
-    if (backgroundColor) computedStyle.backgroundColor = ColorToCSS(backgroundColor);
+    if (background) computedStyle.background = ColorToCSS(background);
     if (hAlign) computedStyle.justifyContent = AlignmentToCSS(hAlign);
     if (vAlign) computedStyle.alignItems = AlignmentToCSS(vAlign);
+    if (gap) {
+        if (gap === "auto") {
+            computedStyle[direction === "horizontal" ? "justifyContent" : "alignItems"] = "space-between";
+        } else {
+            computedStyle.gap = `${gap}px`;
+        }
+    }
 
     if (padding) computedStyle.padding = SpacingValueToCSS(padding);
     if (margin) computedStyle.margin = SpacingValueToCSS(margin);
