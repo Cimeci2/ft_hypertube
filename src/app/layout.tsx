@@ -1,6 +1,4 @@
 import "./globals.css";
-import Header from './components/Header';
-import NotificationProvider from "./components/notification/NotificationProvider";
 import type {Metadata} from "next";
 import {Funnel_Sans} from "next/font/google";
 import {NextIntlClientProvider} from "next-intl";

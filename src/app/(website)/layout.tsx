@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import NotificationProvider from "@/components/notification/NotificationProvider";
 import Header from "@/components/Header";
 
 export const metadata: Metadata = {
@@ -9,9 +8,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-      <NotificationProvider>
+      <>
         <Header/>
         {children}
-      </NotificationProvider>
+      </>
   );
 }

@@ -1,7 +1,7 @@
 import {getRequestConfig} from 'next-intl/server';
 import {cookies, headers} from "next/headers";
 
-const locales = ['en', 'fr'] as const;
+const locales: string[] = ['en', 'fr'] as const;
 const defaultLocale = 'en';
 
 async function getLocaleFromHeaders() {
@@ -13,7 +13,7 @@ async function getLocaleFromHeaders() {
         .split(',')
         .map((part) => part.split(';')[0].trim().split('-')[0]);
 
-    return preferred.find((lang) => locales.includes(lang as any)) ?? defaultLocale;
+    return preferred.find((lang) => locales.includes(lang)) ?? defaultLocale;
 }
 
 export default getRequestConfig(async () => {
