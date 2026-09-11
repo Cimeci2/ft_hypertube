@@ -13,13 +13,17 @@ async function getLocaleFromHeaders() {
         .split(',')
         .map((part) => part.split(';')[0].trim().split('-')[0]);
 
+    console.log(preferred)
+
     return preferred.find((lang) => locales.includes(lang)) ?? defaultLocale;
 }
 
 export default getRequestConfig(async () => {
     const store = await cookies();
-    const locale = store.get('locale')?.value || (await getLocaleFromHeaders());
+    const locale = store.get('app-lang')?.value || (await getLocaleFromHeaders());
 
+    console.log(locale)
+    
     return {
         locale,
         messages: (await import(`./lang/${locale}.json`)).default
