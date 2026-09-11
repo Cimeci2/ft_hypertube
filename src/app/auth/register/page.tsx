@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { authClient } from "@/src/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
   const [error, setError] = useState("");

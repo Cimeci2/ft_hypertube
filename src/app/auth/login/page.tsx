@@ -1,6 +1,6 @@
 "use client"
 
-import { authClient } from "@/src/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 type ProviderName = "linear" | "roblox" | "figma" | "linkedin" | "tiktok" | "slack" | "twitch" | "notion" | "huggingface" | "intra" | "epic" | "wikipedia"
 
