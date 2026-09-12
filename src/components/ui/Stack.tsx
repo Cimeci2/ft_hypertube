@@ -1,4 +1,4 @@
-import {CSSProperties, DetailedHTMLProps, HTMLAttributes} from "react";
+import {ComponentPropsWithoutRef, createElement, CSSProperties, ElementType} from "react";
 import {Property} from "csstype";
 import {
     Direction,
@@ -10,8 +10,18 @@ import {
     AlignmentToCSS, SpacingValueToCSS, ColorToCSS, Color
 } from "@/components/ui/utils";
 
+type StackComponent =
+    | "div"
+    | "main"
+    | "section"
+    | "article"
+    | "aside"
+    | "header"
+    | "footer"
+    | "form";
 
-export interface StackProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface StackProperties {
+    component?: StackComponent
     direction?: Direction
     gap?: number | "auto"
     padding?: SpacingValue
@@ -25,10 +35,16 @@ export interface StackProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElem
     background?: Color;
     border?: "light" | "dark",
     radius?: number;
+    wrap?: boolean;
 }
 
-export default function Stack(
+type StackProps<T extends StackComponent> =
+    StackProperties &
+    Omit<ComponentPropsWithoutRef<T>, keyof StackProperties>;
+
+export default function Stack<T extends StackComponent = "div">(
     {
+        component = "div",
         direction = "vertical",
         gap = 10,
         padding,
@@ -42,13 +58,14 @@ export default function Stack(
         radius,
         border,
         maxWidth,
+        wrap = true,
         ...props
-    }: StackProps
+    }: StackProps<T>
 ) {
     const computedStyle: CSSProperties = {
         display: "flex",
         ...DirectionToCSS(direction),
-        flexWrap: "wrap",
+        flexWrap: wrap ? "wrap" : "nowrap",
         width,
         height,
         maxWidth,
@@ -72,11 +89,10 @@ export default function Stack(
     if (padding) computedStyle.padding = SpacingValueToCSS(padding);
     if (margin) computedStyle.margin = SpacingValueToCSS(margin);
 
-    return (
-        <div
-            {...props}
-            style={computedStyle}
-        >
-        </div>
-    )
+    const Component = (component ?? "div") as ElementType;
+
+    return createElement(Component, {
+        ...props,
+        style: computedStyle
+    });
 }
