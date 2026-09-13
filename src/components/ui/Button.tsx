@@ -31,6 +31,7 @@ export interface ButtonProps {
     submit?: boolean,
     disabled?: boolean,
     style?: CSSPropertiesWithState,
+    layoutId?: string,
 }
 
 interface CSSPropertiesWithTypographyProps extends CSSPropertiesWithState {
@@ -104,6 +105,7 @@ export function Button(props: ButtonProps) {
             onClick={props.onClick}
             href={props.href}
             type={props.submit ? "submit" : "button"}
+            layoutId={props.layoutId}
         >
             {props.variant === "primary" && (["yellow", "orange", "red", "pink", "purple"] as Color[]).map((color, index) => (
                 <motion.span

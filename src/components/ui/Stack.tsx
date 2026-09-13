@@ -9,6 +9,7 @@ import {
     FlexValueToCSS,
     AlignmentToCSS, SpacingValueToCSS, ColorToCSS, Color
 } from "@/components/ui/utils";
+import {motion} from "motion/react";
 
 type StackComponent =
     | "div"
@@ -29,6 +30,7 @@ export interface StackProperties {
     height?: Property.Height<string | number>
     width?: Property.Width<string | number>
     maxWidth?: 1200 | Property.Width<string | number>
+    maxHeight?: Property.Height<string | number>
     vAlign?: Alignment;
     hAlign?: Alignment;
     flex?: FlexValue;
@@ -36,6 +38,7 @@ export interface StackProperties {
     border?: "light" | "dark",
     radius?: number;
     wrap?: boolean;
+    animatedLayout?: boolean;
 }
 
 type StackProps<T extends StackComponent> =
@@ -58,7 +61,9 @@ export default function Stack<T extends StackComponent = "div">(
         radius,
         border,
         maxWidth,
+        maxHeight,
         wrap = true,
+        animatedLayout = false,
         ...props
     }: StackProps<T>
 ) {
@@ -69,6 +74,7 @@ export default function Stack<T extends StackComponent = "div">(
         width,
         height,
         maxWidth,
+        maxHeight,
         borderRadius: radius ? `${radius}px` : undefined,
         ...FlexValueToCSS(flex),
         border: border ? `1px solid ${ColorToCSS(border === "light" ? "borderLight" : "borderDark")}` : undefined,
@@ -89,10 +95,12 @@ export default function Stack<T extends StackComponent = "div">(
     if (padding) computedStyle.padding = SpacingValueToCSS(padding);
     if (margin) computedStyle.margin = SpacingValueToCSS(margin);
 
-    const Component = (component ?? "div") as ElementType;
+    const Component = animatedLayout ? motion[component] : (component ?? "div") as ElementType;
+    const AnimatedProps = animatedLayout ? { layout: true }:{}
 
     return createElement(Component, {
         ...props,
-        style: computedStyle
+        ...AnimatedProps,
+        style: computedStyle,
     });
 }
