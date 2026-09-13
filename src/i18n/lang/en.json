@@ -1,10 +1,39 @@
 {
+  "action": {
+    "enter_text": "Enter text here",
+    "or": "or",
+    "showless": "Show less",
+    "showmore": "Show more"
+  },
   "auth": {
+    "email": {
+      "placeholder": "E-mail or username"
+    },
+    "error": {
+      "email_not_verified": "Your email as not been verified. Check your inbox and try again.",
+      "invalid_display_username": "Your username is invalid.",
+      "invalid_email": "Ton adresse e-mail n'est pas valide.",
+      "invalid_email_or_password": "Invalid email or password",
+      "invalid_username": "Ton adresse e-mail ou ton nom d'utilisateur est invalide",
+      "unexpected_error": "An unknown error occurred. Please try again later.",
+      "username_is_already_taken": "That username already exists. How about \"{suggest}\"?",
+      "username_is_immutable": "You are not allowed to change your username.",
+      "username_too_long": "Your username is too long.",
+      "username_too_short": "Your username is too short."
+    },
     "login": {
-      "title": "Login"
+      "action": "Login",
+      "description": "Discover your favorite content and pick up right where you left off.",
+      "title": "Welcome back !"
+    },
+    "oauth": {
+      "login_with": "Login with {provider}"
+    },
+    "password": {
+      "placeholder": "Password"
     },
     "register": {
-      "title": "Register"
+      "action": "Register"
     }
   }
 }

@@ -1,35 +1,68 @@
-"use client"
-
-import { authClient } from "@/lib/auth-client";
-
-type ProviderName = "linear" | "roblox" | "figma" | "linkedin" | "tiktok" | "slack" | "twitch" | "notion" | "huggingface" | "intra" | "epic" | "wikipedia"
+import styles from "./page.module.css";
+import Stack from "@/components/ui/Stack";
+import {Typography} from "@/components/ui/Typography";
+import {useTranslations} from "next-intl";
+import {Providers} from "@/lib/auth";
+import OAuthButtons from "@/components/auth/OAuthButtons";
+import Divider from "@/components/ui/Divider";
+import LoginForm from "@/components/auth/LoginForm";
 
 export default function LoginPage() {
-  const handleEmailLogin = async (email: string, password: string) => {
-    const { error } = await authClient.signIn.email({
-      email,
-      password,
-      callbackURL: "/home"
-    })
-    if (error) {
-      console.error("Email login error:", error);
-    }
-  }
+    const t = useTranslations();
 
-  const handleOauthLogin = async (providerName: ProviderName) => {
+    return (
+        <Stack
+            component={"main"}
+            direction={"horizontal"}
+            width={"100%"}
+            vAlign={"center"}
+            height={"100dvh"}
+            wrap={false}
+            className={styles.mainContainer}
+        >
+            <Stack padding={[40, 20, 20, 20]} maxWidth={600} width={"100%"} gap={30} wrap={false}>
+                <Stack>
+                    <Typography variant={"title"}>{t("auth.login.title")}</Typography>
+                    <Typography variant={"caption"} color={"lightSecondary"}>{t("auth.login.description")}</Typography>
+                </Stack>
 
-    const { error } = await authClient.signIn.social({
-      provider: providerName,
-      callbackURL: "/home"
-    });
-    if (error) {
-      console.error("Oauth login error:", error);
-    }
-    
-  };
-  return (
-    <main className="min-h-screen flex items-center justify-center bg-zinc-950">
-      <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-xl">
+                <OAuthButtons
+                    providers={Object.entries(Providers).map(([name, provider]) => ({
+                        id: name,
+                        name: provider.name,
+                        backgroundColor: provider.backgroundColor,
+                        textColor: provider.textColor,
+                    }))}
+                />
+
+                <Divider text={t("action.or")}/>
+
+                <LoginForm />
+            </Stack>
+            <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{
+                    objectFit: "cover",
+                    width: "calc(100vw - 600px)",
+                    height: "100%",
+                    position: "fixed",
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                }}
+                className={styles.video}
+            >
+                <source src="/video/sample_video_large.m4v" />
+            </video>
+        </Stack>
+    );
+}
+
+/*
+<div className="w-full max-w-md rounded-xl bg-white p-8 shadow-xl">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-zinc-900">
             Welcome back
@@ -39,7 +72,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form 
+        <form
           className="space-y-4"
           onSubmit={(event) => {
             event.preventDefault()
@@ -170,6 +203,4 @@ export default function LoginPage() {
           </a>
         </p>
       </div>
-    </main>
-  );
-}
+ */

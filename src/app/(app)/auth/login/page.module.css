@@ -1,0 +1,10 @@
+@media (max-width: 1200px) {
+    .video {
+        display: none;
+    }
+
+    .mainContainer {
+        align-items: flex-start !important;
+        justify-content: center !important;
+    }
+}
