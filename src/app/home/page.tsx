@@ -1,7 +1,5 @@
 "use client";
-
-import LogoutButton from "@/src/app/components/LogoutButton"
-import { authClient } from "@/src/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 export default function Home() {
   const { data: session, isPending } = authClient.useSession();
@@ -22,7 +20,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex justify-center">
-        <LogoutButton className="w-1/2" toggleOnHover={{hoverDelay: 1000}} >logout</LogoutButton>
+
       </div>
     </>
   );

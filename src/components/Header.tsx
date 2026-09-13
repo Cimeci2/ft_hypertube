@@ -30,7 +30,7 @@ export default function Header() {
                         left={ <Icon name={"arrow-right"} /> }
                         href={"/auth/login"}
                     >
-                        {t("auth.login.title")}
+                        {t("auth.login.action")}
                     </Button>
                 </Stack>
             </Stack>
