@@ -2,6 +2,7 @@ import {ComponentPropsWithRef, CSSProperties} from "react";
 import {Color, ColorToCSS} from "@/components/ui/utils";
 import {motion} from "motion/react";
 import {TargetAndTransition} from "motion";
+import TransitionLink from "@/components/ui/TransitionLink";
 
 export type TypographyVariant =
     | "title"
@@ -9,6 +10,7 @@ export type TypographyVariant =
     | "body"
 
 export interface TypographyProps extends ComponentPropsWithRef<"p"> {
+    href?: string;
     variant?: TypographyVariant;
     bold?: number | boolean;
     fontSize?: number;
@@ -64,10 +66,14 @@ export function Typography(props: TypographyProps) {
         exit: props.exit,
     } : {}
 
-    return <Component
+    const typography = <Component
         style={{...style, ...props.style}}
         {...motionProps}
     >
         {props.children}
     </Component>
+
+    return props.href ? (
+        <TransitionLink href={props.href} key={props.key} style={{ color: style.color, textDecoration: "none" }}>{typography}</TransitionLink>
+    ) : typography
 }

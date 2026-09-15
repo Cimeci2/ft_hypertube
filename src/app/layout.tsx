@@ -20,6 +20,12 @@ export default function RootLayout({children}: LayoutProps<"/">) {
         <NextIntlClientProvider>
             {children}
         </NextIntlClientProvider>
+        <div className={"body_transition"}>
+            <span/>
+            <span/>
+            <span/>
+            <span/>
+        </div>
         </body>
         </html>
     );
