@@ -17,7 +17,7 @@
     "error": {
       "email_not_verified": "Your email as not been verified. Check your inbox and try again.",
       "invalid_display_username": "Your username is invalid.",
-      "invalid_email": "Ton adresse e-mail n'est pas valide.",
+      "invalid_email": "Your email address is not valid.",
       "invalid_email_or_password": "Invalid email or password",
       "invalid_username": "Ton adresse e-mail ou ton nom d'utilisateur est invalide",
       "unexpected_error": "An unknown error occurred. Please try again later.",
@@ -28,8 +28,14 @@
       "username_too_short": "Your username is too short."
     },
     "login": {
+      "accountexist": {
+        "action": "Already have an account? Log in."
+      },
       "action": "Login",
       "description": "Discover your favorite content and pick up right where you left off.",
+      "noaccount": {
+        "action": "No account? Register here."
+      },
       "title": "Welcome back !"
     },
     "name": {
@@ -41,6 +47,9 @@
     "password": {
       "confirm": {
         "placeholder": "Confirm password"
+      },
+      "forgot": {
+        "action": "Forgot password?"
       },
       "placeholder": "Password"
     },

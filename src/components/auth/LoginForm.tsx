@@ -6,6 +6,7 @@ import TextInput from "@/components/ui/TextInput";
 import Stack from "@/components/ui/Stack";
 import {Button} from "@/components/ui/Button";
 import AuthErrorTypography from "@/components/auth/AuthErrorTypography";
+import {Typography} from "@/components/ui/Typography";
 
 export default function LoginForm() {
     const t = useTranslations();
@@ -54,6 +55,24 @@ export default function LoginForm() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <AuthErrorTypography error={error} />
+                <Stack gap={5}>
+                <Typography
+                    variant={"caption"}
+                    color={"lightSecondary"}
+                    href={"/auth/register"}
+                    bold={400}
+                >
+                    {t("auth.password.forgot.action")}
+                </Typography>
+                <Typography
+                    variant={"caption"}
+                    color={"lightSecondary"}
+                    href={"/auth/register"}
+                    bold={400}
+                >
+                    {t("auth.login.noaccount.action")}
+                </Typography>
+                </Stack>
             </Stack>
             <Button
                 variant={"primary"}

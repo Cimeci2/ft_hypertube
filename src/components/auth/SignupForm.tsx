@@ -121,7 +121,7 @@ export default function SignupForm({ providers }: { providers: OAuthButton[] }) 
 
                     <Divider text={t("action.or")}/>
 
-                    <Stack component={"form"} gap={20} onSubmit={handleEmailVerification}>
+                    <Stack component={"form"} gap={30} onSubmit={handleEmailVerification}>
                         <Stack>
                             <TextInput
                                 autoFocus
@@ -131,6 +131,14 @@ export default function SignupForm({ providers }: { providers: OAuthButton[] }) 
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <AuthErrorTypography error={error} />
+                            <Typography
+                                variant={"caption"}
+                                color={"lightSecondary"}
+                                href={"/auth/login"}
+                                bold={400}
+                            >
+                                {t("auth.login.accountexist.action")}
+                            </Typography>
                         </Stack>
 
 

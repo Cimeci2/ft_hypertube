@@ -17,7 +17,7 @@
     "error": {
       "email_not_verified": "Ton adresse e-mail n'a pas été vérifiée. Vérifie ta boîte de réception et réessaye.",
       "invalid_display_username": "Ton nom d'utilisateur est invalide",
-      "invalid_email": "Your email address is not valid.",
+      "invalid_email": "Ton adresse e-mail n'est pas valide.",
       "invalid_email_or_password": "E-mail ou mot de passe invalide",
       "invalid_username": "Your email address or username is invalid.",
       "unexpected_error": "Une erreur inconnu s'est produite. Réessaye plus tard.",
@@ -28,8 +28,14 @@
       "username_too_short": "Ton nom d'utilisateur est trop court."
     },
     "login": {
+      "accountexist": {
+        "action": "Déjà un compte ? Connecte-toi."
+      },
       "action": "Connexion",
       "description": "Retrouvez tes contenus préférés et reprenez le visionnage là où tu l’avais laissé.",
+      "noaccount": {
+        "action": "Pas de compte ? Inscris-toi ici."
+      },
       "title": "Bon retour parmi nous !"
     },
     "name": {
@@ -41,6 +47,9 @@
     "password": {
       "confirm": {
         "placeholder": "Confirmation du mot de passe"
+      },
+      "forgot": {
+        "action": "Mot de passe oublié ?"
       },
       "placeholder": "Mot de passe"
     },
