@@ -1,4 +1,3 @@
-import styles from "./page.module.css";
 import Stack from "@/components/ui/Stack";
 import {Typography} from "@/components/ui/Typography";
 import {useTranslations} from "next-intl";
@@ -15,10 +14,8 @@ export default function LoginPage() {
             component={"main"}
             direction={"horizontal"}
             width={"100%"}
-            vAlign={"center"}
+            hAlign={"center"}
             height={"100dvh"}
-            wrap={false}
-            className={styles.mainContainer}
         >
             <Stack padding={[40, 20, 20, 20]} maxWidth={600} width={"100%"} gap={30} wrap={false}>
                 <Stack>
@@ -39,24 +36,6 @@ export default function LoginPage() {
 
                 <LoginForm />
             </Stack>
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{
-                    objectFit: "cover",
-                    width: "calc(100vw - 600px)",
-                    height: "100%",
-                    position: "fixed",
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                }}
-                className={styles.video}
-            >
-                <source src="/video/sample_video_large.m4v" />
-            </video>
         </Stack>
     );
 }
