@@ -10,6 +10,7 @@ import {
     AlignmentToCSS, SpacingValueToCSS, ColorToCSS, Color
 } from "@/components/ui/utils";
 import {motion} from "motion/react";
+import {TargetAndTransition, Transition} from "motion";
 
 type StackComponent =
     | "div"
@@ -39,6 +40,11 @@ export interface StackProperties {
     radius?: number;
     wrap?: boolean;
     animatedLayout?: boolean;
+    animated?: boolean;
+    initial?: TargetAndTransition;
+    exit?: TargetAndTransition;
+    animate?: TargetAndTransition;
+    transition?: Transition;
 }
 
 type StackProps<T extends StackComponent> =
@@ -64,6 +70,7 @@ export default function Stack<T extends StackComponent = "div">(
         maxHeight,
         wrap = true,
         animatedLayout = false,
+        animated = false,
         ...props
     }: StackProps<T>
 ) {
@@ -95,7 +102,7 @@ export default function Stack<T extends StackComponent = "div">(
     if (padding) computedStyle.padding = SpacingValueToCSS(padding);
     if (margin) computedStyle.margin = SpacingValueToCSS(margin);
 
-    const Component = animatedLayout ? motion[component] : (component ?? "div") as ElementType;
+    const Component = animatedLayout || animated ? motion[component] : (component ?? "div") as ElementType;
     const AnimatedProps = animatedLayout ? { layout: true }:{}
 
     return createElement(Component, {
