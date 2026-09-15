@@ -1,13 +1,14 @@
 "use client";
 import Icon, { IconProps } from "@/components/ui/Icon";
-import {InputHTMLAttributes, ReactNode, useState} from "react";
+import {ComponentPropsWithRef, RefObject, useState} from "react";
 import Stack from "@/components/ui/Stack";
 import {ColorToCSS} from "@/components/ui/utils";
 import {AnimatePresence, motion} from "motion/react";
 import {useTranslations} from "next-intl";
 import {Button} from "@/components/ui/Button";
 
-export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends ComponentPropsWithRef<"input"> {
+    ref?: RefObject<HTMLInputElement>
     icon?: IconProps["name"]
     secured?: boolean
 }
@@ -56,6 +57,7 @@ export default function TextInput({secured, icon, ...props}: TextInputProps) {
                     padding={0}
                     width={30}
                     radius={15}
+                    tabIndex={1}
                 >
                     <Icon name={showPassword ? "eye-off" : "eye"}/>
                 </Button>
