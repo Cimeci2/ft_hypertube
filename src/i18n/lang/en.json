@@ -1,12 +1,17 @@
 {
   "action": {
+    "back": "Back",
     "enter_text": "Enter text here",
+    "next": "Next",
     "or": "or",
     "showless": "Show less",
     "showmore": "Show more"
   },
   "auth": {
     "email": {
+      "nousername": {
+        "placeholder": "E-mail"
+      },
       "placeholder": "E-mail or username"
     },
     "error": {
@@ -16,6 +21,7 @@
       "invalid_email_or_password": "Invalid email or password",
       "invalid_username": "Ton adresse e-mail ou ton nom d'utilisateur est invalide",
       "unexpected_error": "An unknown error occurred. Please try again later.",
+      "user_already_exists_use_another_email": "An account is already linked to this address. Maybe you wanted to login?",
       "username_is_already_taken": "That username already exists. How about \"{suggest}\"?",
       "username_is_immutable": "You are not allowed to change your username.",
       "username_too_long": "Your username is too long.",
@@ -26,14 +32,26 @@
       "description": "Discover your favorite content and pick up right where you left off.",
       "title": "Welcome back !"
     },
+    "name": {
+      "placeholder": "Your name"
+    },
     "oauth": {
       "login_with": "Login with {provider}"
     },
     "password": {
+      "confirm": {
+        "placeholder": "Confirm password"
+      },
       "placeholder": "Password"
     },
     "register": {
-      "action": "Register"
+      "action": "Register",
+      "description": "Discover your favorite content and enjoy an experience designed with you in mind.",
+      "title": {
+        "step0": "Welcome to the adventure!",
+        "step1": "Create a password",
+        "step2": "What's your name ?"
+      }
     }
   }
 }
