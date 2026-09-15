@@ -23,7 +23,7 @@ export default function Header() {
                         variant={"borderless"}
                         href={"/auth/register"}
                     >
-                        {t("auth.register.title")}
+                        {t("auth.register.action")}
                     </Button>
                     <Button
                         variant={"primary"}
