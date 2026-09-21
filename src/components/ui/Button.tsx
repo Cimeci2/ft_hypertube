@@ -10,6 +10,8 @@ import {Typography, TypographyProps} from "@/components/ui/Typography";
 import {motion} from "motion/react"
 import Stack from "@/components/ui/Stack";
 import {Property} from "csstype";
+import Link from "next/link";
+import TransitionLink from "@/components/ui/TransitionLink";
 
 export type ButtonVariant = "primary" | "secondary" | "borderless";
 
@@ -33,6 +35,7 @@ export interface ButtonProps {
     style?: CSSPropertiesWithState,
     layoutId?: string,
     tabIndex?: number,
+    transitionHref?: boolean
 }
 
 interface CSSPropertiesWithTypographyProps extends CSSPropertiesWithState {
@@ -76,7 +79,7 @@ export function Button(props: ButtonProps) {
     }
 
     const {typography: typographyProps, ...cssProperties} = variants[props.variant ?? "secondary"]
-    const Component = props.href ? motion.a : motion.button;
+    const Component = props.href ? motion(props.transitionHref ? TransitionLink : Link) : motion.button;
 
     return (
         <Component
