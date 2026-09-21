@@ -9,7 +9,7 @@ export default function LoginPage() {
             direction={"horizontal"}
             width={"100%"}
             hAlign={"center"}
-            height={"100dvh"}
+            height={"calc(100dvh - 60px)"}
         >
             <Stack padding={[40, 20, 20, 20]} maxWidth={600} width={"100%"} gap={30} wrap={false}>
                 <SignupForm
